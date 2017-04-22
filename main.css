@@ -1,0 +1,24 @@
+blockquote {
+    color: rgb(0, 255, 235);
+}
+
+h1 {
+    color: rgba(67, 23, 163, 0.82);
+    font-size: 50px;
+    text-align: center;
+}
+
+strong {
+    color: #00f;
+    color: #f00;
+}
+
+p {
+    color: navy;
+    letter-spacing:1em;
+    line-height: 3em;
+}
+
+
+
+/*123*/
