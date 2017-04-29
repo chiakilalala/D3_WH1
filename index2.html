@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0 auto;
+        }
+        
+        p {
+            border: 2px solid #ccc;
+            height: 1em;
+            width: 6em;
+            padding: .5em;
+            border-radius: 25px;
+        }
+        
+        input[type="button"] {
+            width: 3em;
+            font-size: 2em;
+        }
+
+    </style>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <scritp src="random.js"></scritp>
+</head>
+
+<body>
+
+    <p></p>
+    <input type="button" onclick="launch()" value="啟動">
+
+    <script>
+        function launch() {
+            d3.select('p').text(random(2000, 2053));
+        }
+
+    </script>
+
+
+    <hr>
+
+
+    <svg width="400" height="300">
+        <circle cx="150" cy="120" r="10"></circle> //r半徑
+    <rect x="160 " y="45" width="5" height="78"></rect>
+        
+        
+        
+    </svg>
+
+    <!--    bar    -->
+    <hr>
+
+    <svg width="400" height="400" id="svg_1">
+        
+    </svg>
+
+
+    <script>
+        
+        for(var i=0; i<20; i=i+1){
+            var num = random(20,300);
+            
+        d3.select("#svg_1")
+          .append("rect")
+          .attr({
+            "x":10,
+            "y":10+12*i,
+            "width": num,
+            "height": 10,
+            "fill": "red"
+        })
+        d3.select("#svg_1")
+          .append("text")
+          .attr({
+            "x": 10+num+15,
+            "y": 10+12*i+8,
+            "font-size":9
+        }).text(num);
+            
+        function random(n,m){
+  return Math.ceil(Math.random()*(m-n)+n);    
+            
+        }
+        
+    </script>
+    
+    <hr>
+    
+    <svg width="400" height="300" id="svg2">
+       
+</svg>
+<script>
+    var lastNum = 0;
+    var points ="10,10" ;
+    for (var i= 0;i<20;i++){
+        var num = random(20,300);
+        points = points+(10+num)+","+(10+12*(i+1))+" ";
+        d3.select("#svg2")
+           .append("circle")
+          .attr({
+            cx:10+num,
+            cy:10+12*(i+1),
+            r:3,
+            fill:"red"
+            
+        });
+        d3.select("#svg2")
+        .append("text")
+        .attr({
+            x:num+15,
+            y:25+12*i,
+            "font-size":12
+        }).text(num);
+        lastNum = num;
+        
+        }
+    points = points + "10,"+(21*12+10);
+    
+    d3.select("#svg2")
+       .append("polyline")
+       .attr({
+        "points":points,
+        "fill":"rgba(0,0,0,0,)",
+        "stroke":"#333",
+             });
+    function random(n,m){
+    return Math.ceil(Math.random()*(m-n)+n);
+    }
+    
+    
+    </script>
+
+</body>
+
+
+</html>
