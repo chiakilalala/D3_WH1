@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v3.js"></script>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        var arr = [85, 60, 99, 49, 77, 82,60,77,88];
+
+        bind();
+        render();
+        console.log(d3.selectAll("div"));
+       
+//        selection.enter()
+//            .append("div").text(function(d) {
+//                return d;
+//            });
+//        selection.exit().remove();
+
+//        console.log(d3.selectAll("div"));
+        
+        function bind(){
+             var selection = d3.select("body")
+            .selectAll("div")
+            .data(arr) //綁定
+             
+             selection.enter()
+            .append("div");
+            
+              selection.exit().remove();
+            
+        }
+        function render(){
+            d3.selectAll("div").style({
+               color:function(d){ //物件裡面的匿名函是 d是每一筆資料 第一個85 要回傳<70
+                     if(d<70){
+                         return"red";
+                     }   
+                     else{
+                         return"black";
+                     }
+               }
+            }).text(function(d,i) {
+            return (i+1)+":"+d; //加上內容
+        });
+            
+        }
+
+    </script>
+
+
+</body>
+
+</html>

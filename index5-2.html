@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v3.js"></script>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        var arr = [85, 60, 99, 49, 77, 82, 60, 77, 88];
+        var w = 800,
+            h = 700,
+            p = 100;
+
+        svg();
+        bind();
+        render();
+
+        console.log(d3.selectAll("div"));
+
+        function svg() {
+            d3.select("div").append("svg").attr({
+                width: w,
+                height: h,
+            });
+        }
+        //        selection.enter()
+        //            .append("div").text(function(d) {
+        //                return d;
+        //            });
+        //        selection.exit().remove();
+
+        //    console.log(d3.selectAll("svg"));
+
+        function bind() {
+            //rect------------------------
+            var selection = d3.select("svg")
+                .selectAll("rect")
+                .data(arr); //綁定
+
+            selection.enter()
+                .append("rect");
+
+            selection.exit().remove();
+
+            //text--------------------------------
+            var selection_text = d3.select("svg")
+                .selectAll("text")
+                .data(arr); //綁定
+
+            selection_text.enter()
+                .append("text");
+
+            selection_text.exit().remove();
+
+        }
+
+        function render() {
+            d3.selectAll("rect")
+                .attr({
+                    x: function(d, i) {
+                        return p + (40 + 2) * i
+                    }, //
+                    y: function(d, i) {
+                        return h - p - d
+                    },
+                    width: 40,
+                    height: function(d, i) {
+                        return d
+                    },
+                    fill: function(d, i) {
+                        if (d < 70) {
+                            return "red";
+                        } else {
+                            return "lightgreen";
+                        }
+                    }
+                });
+            d3.selectAll("text")
+                .attr({
+                    x: function(d, i) {
+                        return p + (40 + 2) * i + 10
+                    }, //
+                    y: function(d, i) {
+                        return h - p + 20;
+                    }
+
+
+                }).text(function(d, i) {
+                    return d;
+                })
+
+
+        }
+        var random = function random(n, m) {
+            return Math.ceil(Math.random() * (m - n) + n);
+        } //產生亂數加到資料 =>array
+
+        function update() {
+            var num = random(10,100);
+            arr.push(num);
+            bind();
+            render();
+
+        }
+         function remove() {
+            arr.shift();
+            bind();
+            render();
+
+        }
+    </script>
+    <input type="button" value="新增" onclick="update()">
+    <input type="button" value="移除" onclick="remove()">
+
+
+
+</body>
+
+</html>

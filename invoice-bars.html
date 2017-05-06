@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>d3-start</title>
+    <script src="https://d3js.org/d3.v3.js"></script>
+    <style>
+        div{
+            font-size: 7px;
+        }
+    </style>
+</head>
+<body>
+  <svg width="900" height="500" id="svg">
+      
+  </svg>
+   
+   <script>
+       d3.json("invoice-taipei.json", function(dataSet){
+           var svg = d3.select("svg");
+           var fDataSet = dataSet.filter(function(d){
+              return d.amount>1000000000 && d.date === "2016/8/1"
+              && d.cid === "A";
+           });
+           var xScale = d3.scale.linear()
+                        .domain([0,1000000000])
+                        .range([0,100])
+                        .clamp(true);
+           
+           for(var i=0; i<fDataSet.length; i++){ //跑資料條
+ //             svg.append("text").attr({
+//                  "x":0,
+//                  "y":10+20*i,
+                  
+//              });
+               svg.append("rect").attr({
+                   "x":300,
+                   "y":0+20*i,
+                   "width":xScale(fDataSet[i].amount),
+                   "height":16,
+                  "fill":"red"
+               })
+           }
+       });
+   </script>
+</body>
+</html>
